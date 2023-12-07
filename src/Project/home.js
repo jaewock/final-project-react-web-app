@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 
 function Home() {
   const [account, setAccount] = useState(null);
-  const [likes, setLikes] = useState([]);
   const [following, setFollowing] = useState([]);
   const [likesFollowing, setLikesFollowing] = useState([]);
   const [followed, setFollowed] = useState([]);
@@ -16,15 +15,9 @@ function Home() {
     const account = await client.account();
     setAccount(account);
     if (account) {
-      await fetchLikes(account._id);
       await fetchFollowing(account._id);
       await fetchFollowed(account._id);
     }
-  };
-
-  const fetchLikes = async (userId) => {
-    const likes = await service.getLikesForUser(userId);
-    setLikes(likes);
   };
 
   const fetchFollowing = async (userId) => {
@@ -75,7 +68,7 @@ function Home() {
       <h1 className="display-3">Home</h1>
       <p>
         Welcome to Album Alliance, where you can "like" your favorite albums and
-        see what albums other people are listening to!
+        see what albums other people are listening to.
       </p>
 
       <p>
@@ -83,8 +76,10 @@ function Home() {
         follow other users to see what albums they have been enjoying lately!
       </p>
 
+      <br></br>
+      <br></br>
       <div className="following-liked">
-        <h1 className="display-6">Liked Albums of People That I Follow</h1>
+        <h1 className="display-6">Liked Albums of People That I Follow:</h1>
         <div className="table-responsive">
           <table className="table table-striped">
             <tbody>
@@ -108,8 +103,11 @@ function Home() {
         </div>
       </div>
 
+      <br></br>
+      <br></br>
+
       <div className="followed-liked">
-        <h1 className="display-6">Liked Albums of People That Follow Me</h1>
+        <h1 className="display-6">Liked Albums of People That Follow Me:</h1>
         <div className="table-responsive">
           <table className="table table-striped">
             <tbody>
